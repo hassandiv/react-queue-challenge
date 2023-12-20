@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [products, setProducts] = useState(undefined);
+	const [queue, setQueue] = useState([[], [], [], [], []]);
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+	};
+
+	console.log("products", products);
+
+	return (
+		<div className="App">
+			<form onSubmit={handleSubmit}>
+				<input
+					type="number"
+					name="checkout"
+					onChange={(e) => setProducts(e.target.value)}
+				/>
+				<button type="submit">Checkout</button>
+			</form>
+			<div className="Queue">
+				{queue?.map((queue, idx) => (
+					<div key={idx}>X</div>
+				))}
+			</div>
+		</div>
+	);
 }
 
 export default App;
