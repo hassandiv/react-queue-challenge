@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
@@ -20,11 +20,26 @@ function App() {
 		console.log("leastQueue", leastQueue);
 
 		setQueue((prevQueue) =>
-			prevQueue.map((q) => (q === leastQueue ? [...q, Number(products)] : q))
+			prevQueue.map((queue) =>
+				queue === leastQueue ? [...queue, Number(products)] : queue
+			)
 		);
 
 		console.log("queue", queue);
 	};
+
+	useEffect(() => {
+		const interval = setInterval(() => {
+			setQueue((prevQueue) =>
+				prevQueue.map((queue) =>
+					[queue[0] - 1, ...queue.slice(1)].filter((value) => value > 0)
+				)
+			);
+		}, 1000);
+		return () => {
+			clearInterval(interval);
+		};
+	}, []);
 
 	return (
 		<div className="App">
@@ -38,7 +53,7 @@ function App() {
 			</form>
 			<div className="Queue">
 				{queue?.map((queue, idx) => (
-					<div key={idx}>
+					<div key={idx} className="EachQueue">
 						{queue.map((products, idx) => (
 							<div key={idx}>{products}</div>
 						))}

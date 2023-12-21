@@ -11,6 +11,13 @@
 	margin-top: 40px;
 }
 
+.EachQueue {
+	min-width: 100px;
+	border: 1px dashed #000;
+	text-align: center;
+	min-height: 100px;
+}
+
 .App-header {
 	background-color: #282c34;
 	min-height: 100vh;
